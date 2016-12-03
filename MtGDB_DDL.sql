@@ -6,6 +6,7 @@ create table creatures (
   cardSet text,
   power integer,
   toughness integer,
+  rarity string,
   primary key (cardID)
 );
 
@@ -15,6 +16,7 @@ create table nonCreatures (
   color text,
   cardType text,
   cardSet text,
+  rarity string,
   primary key (cardID)
 );
 
