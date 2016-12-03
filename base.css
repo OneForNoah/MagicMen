@@ -20,13 +20,13 @@ body {
 
 #left-panel {
   border: 1px solid #593a0e;
-  min-height: 400px;
-  width: 15%;
+  /*min-height: 400px;*/
+  /*width: 15%;*/
   /*background-color: #25591f;*/
 }
 
-
-
 #main-body {
-
+  border: 1px solid black;
+  /*background-image: url("http://client-cdn.crystalcommerce.com/photo/ideal808/file/102722/large/playmat_originalfield.jpg");
+  background-color: #cccccc;*/
 }
