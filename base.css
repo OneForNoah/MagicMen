@@ -19,10 +19,10 @@ body {
 }
 
 #left-panel {
-  /*border: 1px solid #593a0e;*/
+  border: 1px solid #593a0e;
   min-height: 400px;
   width: 15%;
-  background-color: #25591f;
+  /*background-color: #25591f;*/
 }
 
 
