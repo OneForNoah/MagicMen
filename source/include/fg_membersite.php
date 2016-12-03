@@ -731,7 +731,7 @@ class FGMembersite
     function DBLogin()
     {
 
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        $this->connection = mysqli_connect($this->db_host,$this->username,$this->pwd);
 
         if(!$this->connection)
         {
