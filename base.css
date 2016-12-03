@@ -3,6 +3,44 @@ body {
   height: 100%;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    margin-right: 75%;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;
+    /*height: 100%;*/
+    overflow: auto;
+    border: 1px solid black;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+li {
+  border-bottom: 1px solid black;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
 #header {
   background: -webkit-linear-gradient(top left, #19270d, #25591f);
   font-family: "Times New Roman", Times, serif;
@@ -16,17 +54,4 @@ body {
   2px 0 0 #000000,
   0 2px 0 #000000,
   0 -2px 0 #000000;
-}
-
-#left-panel {
-  border: 1px solid #593a0e;
-  /*min-height: 400px;*/
-  /*width: 15%;*/
-  /*background-color: #25591f;*/
-}
-
-#main-body {
-  border: 1px solid black;
-  /*background-image: url("http://client-cdn.crystalcommerce.com/photo/ideal808/file/102722/large/playmat_originalfield.jpg");
-  background-color: #cccccc;*/
 }
