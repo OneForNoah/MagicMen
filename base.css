@@ -1,0 +1,32 @@
+body {
+  /*border: 2px solid black;*/
+  height: 100%;
+}
+
+#header {
+  background: -webkit-linear-gradient(top left, #19270d, #25591f);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+  text-shadow:
+  -1px -1px 0 #eead0e,
+  1px -1px 0 #000000,
+  -1px 1px 0 #000000,
+  1px 1px 0 #000000,
+  -2px 0 0 #000000,
+  2px 0 0 #000000,
+  0 2px 0 #000000,
+  0 -2px 0 #000000;
+}
+
+#left-panel {
+  /*border: 1px solid #593a0e;*/
+  min-height: 400px;
+  width: 15%;
+  background-color: #25591f;
+}
+
+
+
+#main-body {
+
+}
