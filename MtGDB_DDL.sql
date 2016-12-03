@@ -28,7 +28,7 @@ create table Players (
   primary key (playerID)
 );
 
-create table Decklist (
+create table DeckInfo (
   deckID integer unique not null,
   playerID integer,
   deckName text,
@@ -39,8 +39,9 @@ create table Decklist (
     on delete cascade
 );
 
--- create table DeckInfo (
---   deckID integer,
---   cardID integer,
---   primary key (deckID)
--- );
+create table Decklists (
+  deckID integer,
+  cardID integer,
+  numOf integer,
+  primary key (deckID, cardID)
+);
