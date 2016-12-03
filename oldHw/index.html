@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <h1><font face = "Florence" color="#0033cc">CS455 Group Project 1</font></h1>
+    <h3> <font face = "Zapf Chancery" color="#007acc">Trevor, Andy, Noah, and Alden</font> </h3>
+  </head>
+  <body>
+  <font face = "Verdana">
+  &nbsp;&nbsp;a) Apachectl status pulls up the current status of the server, including whether it is up or down.<p>
+
+  &nbsp;&nbsp;b) Essentially, the Server Root is the path to the dir where the configuration, error, and log files are kept, while the Document Root is the path to your files that the server delivers.<p>
+
+  &nbsp;&nbsp;c) Our server listens to port 80 for HTTP connections. But we could change it, by navigating to apache2.conf and editing the "Listen" value to the desired port number.<p>
+
+  &nbsp;&nbsp;d) All files go in the /var/www/html folder!<p>
+
+  &nbsp;&nbsp;e) The traffic log is in /var/log/apache2/access.log. And the error log is right next door in /var/log/apache2/error.log<p>
+
+  &nbsp;&nbsp;f) According to Apache's documentation, the directory index file is a list of resources to look for when the client requests an index of the directory.<br> 
+   &nbsp;&nbsp;&nbsp;It is useful to have because it makes searching our various directories easier and faster.<p>
+
+  &nbsp;&nbsp;g) This one is a little harder to discern. Public_html appears to be a directory where users can store html files that clients want access to. <br>
+   &nbsp;&nbsp;&nbsp;So, on the backend we make those files accessable to the particular clients with our_IP_addr/~their_username<p>
+
+  &nbsp;&nbsp;h) The .htaccess file in the directory allows us to list a file as "password protected".<br>
+   &nbsp;&nbsp;&nbsp;Specifically, the syntax is dictating "AuthUserFile"+ the path to the password protected file and then the keyword "Require valid-user".<br>
+   &nbsp;&nbsp;&nbsp;And finally, a password is created using the htpasswd + doc file address + pw command.<p>
+
+  &nbsp;&nbsp;i) Well, when HTTP issues a 404 code, our site displays its .htaccess file which contains the "ErrorDocument 404 yourdomain.com/404.html".<br> 
+   &nbsp;&nbsp;&nbsp;You can edit this .htaccess file to make it show what ever you want!<p>
+
+  &nbsp;&nbsp;j) GET requests will request data from a specified resource, usually submitted when you, say, double click on a link in your browser!<br>
+   &nbsp;&nbsp;&nbsp;POST requests will submit data to be proccessed by the specified resource, like uploading a file to Moodle.<br>
+   &nbsp;&nbsp;&nbsp;HEAD tags allow us to add data to a webpage that is not loaded to the browser window, but is instead used by search engines or browsers!<br> 
+   &nbsp;&nbsp;&nbsp;The HEAD tags also separate the page into two distinct section and dictate what part of the page loads first!<p>
+  </font>
+  </body>
+</html>
