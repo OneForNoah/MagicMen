@@ -15,8 +15,8 @@ create table nonCreatures (
   cardName text unique,
   manacost text,
   color text,
-  cardType text,
-  cardText text,
+  cardType integer,
+  cardText integer,
   primary key (cardID)
 );
 
