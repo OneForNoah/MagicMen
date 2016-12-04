@@ -13,9 +13,9 @@ $fgmembersite->SetAdminEmail('nreyes@pugetsound.edu');
 //hostname, user name, password, database name and table name
 //note that the script will create the table (for example, fgusers in this case)
 //by itself on submitting register.php for the first time
-$fgmembersite->InitDB(/*hostname*/'aws.amazon.com',
-                      /*username*/'theBoss',
-                      /*password*/'thePawns',
+$fgmembersite->InitDB(/*hostname*/'127.0.0.1 localhost',
+                      /*username*/'noah',
+                      /*password*/'password',
                       /*database name*/'userdb',
                       /*table name*/'usertbl');
 
