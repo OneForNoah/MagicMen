@@ -1,5 +1,8 @@
 body {
   /*border: 2px solid black;*/
+  background-image: url("http://client-cdn.crystalcommerce.com/photo/ideal808/file/102722/large/playmat_originalfield.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   height: 100%;
 }
 

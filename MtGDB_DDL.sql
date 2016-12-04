@@ -1,22 +1,22 @@
 create table creatures (
   cardID integer unique not null,
-  cardName text,
+  cardName text unique,
+  manacost text,
   color text,
   cardType text,
-  cardSet text,
+  cardText text,
   power integer,
   toughness integer,
-  rarity string,
   primary key (cardID)
 );
 
 create table nonCreatures (
   cardID integer unique not null,
-  cardName text,
+  cardName text unique,
+  manacost text,
   color text,
-  cardType text,
-  cardSet text,
-  rarity string,
+  cardType integer,
+  cardText integer,
   primary key (cardID)
 );
 
