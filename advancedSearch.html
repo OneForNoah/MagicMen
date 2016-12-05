@@ -33,12 +33,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <h2>Search the Database for Cards</h2>
 
       <FORM METHOD=POST ACTION="advancedSearch.php">
-        <p>Name: <input name="name" size="100">
+        <!-- <p>Name: <input name="name" size="100">
         <p>Rules Text: <input name="ruletext" size="100">
         <p>Color: <input name="color" size="100">
         <p>Type: <input name="type" size="100">
         <p>Power: <input name="power" size="100">
-        <p>Toughness: <input name="tough" size="100">
+        <p>Toughness: <input name="tough" size="100"> -->
+        <div class="col-md-4">
+          <p>Rules Text: </p>
+          <p>Color: </p>
+          <p>Type: </p>
+          <p>Power: </p>
+          <p>Toughness: </p>
+        </div>
+        <div class="col-md-8">
+          <input name="name" size="100">
+          <input name="ruletext" size="100">
+          <input name="color" size="100">
+          <input name="type" size="100">
+          <input name="power" size="100">
+          <input name="tough" size="100">
+        </div>
         <P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>
         <P>
       </FORM>
