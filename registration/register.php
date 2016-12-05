@@ -12,7 +12,7 @@
                         echo "Name, Username, and Password are required.";
                         header("Location:register.html");
 		}
-		echo "var/www/html/database/users.db";
+
 		//open the sqlite database file
 	    $db = new PDO('sqlite:../database/users.db');
 
@@ -29,12 +29,12 @@
 		$stmt->bindParam(':pw', $pw);
 
 		$id = $db->query("SELECT max(id_user) FROM users");
-		$name = $_POST[name];
-		$usern = $_POST[usern];
-		$pw = $_POST[pw];
-		//echo($stmt);
-		//$db->exec($stmt);
-	    $stmt->execute();
+		$name = $_POST['name'];
+		$usern = $_POST['usern'];
+		$pw = $_POST['pw'];
+		echo($stmt);
+		$db->exec($stmt);
+	    //$stmt->execute();
 
 	        //disconnect from database
 	    $db = null;
