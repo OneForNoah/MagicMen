@@ -14,48 +14,34 @@
 		}
 
     echo 'test0';
-    $db = new PDO('sqlite:./database/user.db');
+    $db = new PDO('sqlite:./database/users.db');
     echo 'test1';
 	    // Set errormode to exceptions
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $un = $_POST['usern'];
-    $username = $db->query("SELECT id_user FROM users WHERE usern = '$un'");
-    $db.close();
+    $userid = $db->query("SELECT id_user FROM users WHERE username = '$un'");
+    $db = null;
 
     echo 'test2';
     $db = new PDO('sqlite:./database/mtgcard.db');
     echo 'test3';
-    $deckID = rand();
+    //$deckID = rand();
     $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
     $stmt->bindParam(':deckID', $deckID);
-    $stmt->bindParam(':playerID', $username);
-    $stmt->bindParam(':deckName', $_POST['deckTitle']);
-    $stmt->bindParam(':deckSize', 60);
+    $stmt->bindParam(':playerID', $playerID);
+    $stmt->bindParam(':deckName', $deckName);
+    $stmt->bindParam(':deckSize', $deckSize);
 
-	/*  //safely insert values into passengers table
-		//order matters (look at your schema) -- fname, mname, lname, ssn
-    $user = $db->query('SELECT max(id_user) FROM users')
-    $db->close();
-    $db = new PDO('sqlite:../database/mtgcard.db');
-    $deck = $db->query('SELECT max(deckID)')
-    $deck = $db->
-    $stmt = $db->prepare("INSERT INTO users (id_user, name, username, password) VALUES (:id, :name, :usern, :pw)");
-		$stmt->bindParam(':id', $id);
-		$stmt->bindParam(':name', $name);
-		$stmt->bindParam(':usern', $usern);
-		$stmt->bindParam(':pw', $pw);
+    $idquery = $db->query("SELECT max(deckId) FROM DeckInfo");
+    $id =  $idquery->fetchColumn(0);
+    $id++;
+    echo($id);
+    $deckId=$id;
+    $playerID=$userid;
+    $deckName=$_POST['deckTitle'];
+    $deckSize=60;
 
-		$idnum = $db->query("SELECT max(id_user) FROM users");
-		$id = echo($idnum);
-		$name = $_POST['name'];
-		$usern = $_POST['usern'];
-		$pw = $_POST['pw'];
-		//echo($stmt);
-		//$db->exec($stmt);
-	    $stmt->execute();
-*/
-	        //disconnect from database
-	    $db = null;
+    $db = null;
 	}
 	catch(PDOException $e)
 	{
