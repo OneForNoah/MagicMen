@@ -7,19 +7,23 @@
 	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	    //safely insert values into passengers table
-		//order matters (look at your schema) -- fname, mname, lname, ssn
-		$stmt = $db->prepare('SELECT FROM users (id_user, name, username, password) VALUES (:id, :name, :usern, :pw);');
-		$stmt->bindParam(':id', $id);
-		$stmt->bindParam(':name', $name);
-		$stmt->bindParam(':usern', $usern);
-		$stmt->bindParam(':pw', $pw);
-
+		if(empty($_POST['power']) && empty($_POST['tough'])) {
+			$resultC = $db->query("SELECT FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
+			$resultN = $db->query("SELECT FROM nonCreatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
+			//COMBINE INTO ONE OUTPUT
+			//RETURN OUTPUT
+		} else if(empty($_POST['power'])) {
+			$resultC = $db->query("SELECT FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND power=$_POST[power]");
+			//RETURN OUTPUT
+		} else if(empty($_POST['tough'])) {
+			$resultC = $db->query("SELECT FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND tough=$_POST[tough]");
+			//RETURN OUTPUT
+		} else {
+			$resultC = $db->query("SELECT FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND power=$_POST[power] AND tough=$_POST[tough]");
+			//RETURN OUTPUT
+		}
 		
-
-
-	    $stmt->execute();
-	    
-	        //disconnect from database
+	    //disconnect from database
 	    $db = null;
 	}
 	catch(PDOException $e)
