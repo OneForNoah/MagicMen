@@ -32,14 +32,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird w3-container">
       <h2>Search the Database for Cards</h2>
 
-      <FORM METHOD=POST ACTION="search.php">
-        <p>Basic Search:<input name="usern" size="100">
+      <FORM METHOD=POST ACTION="advancedSearch.php">
+        <p>Name: <input name="name" size="100">
+        <p>Rules Text: <input name="ruletext" size="100">
+        <p>Color: <input name="color" size="100">
+        <p>Type: <input name="type" size="100">
+        <p>Power: <input name="power" size="100">
+        <p>Toughness: <input name="tough" size="100">
         <P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>
         <P>
       </FORM>
-      <br>
-      <br>
-      <a href="advancedSearch.html"><button class="button big-btn">Advanced Search</button></a>
     </div>
   </div>
   <footer id="myFooter">
