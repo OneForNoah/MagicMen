@@ -1,7 +1,8 @@
 <?php
+	$goto = "Location: login.html";
         try
         {
-                $required = array('usern', 'pw');
+                $required = array('usern', 'password');
                 $error = false;
                 foreach($required as $field) {
                         if (empty($_POST[$field])) {
@@ -22,13 +23,15 @@
 	    //safely insert values into passengers table
 		//order matters (look at your schema) -- fname, mname, lname, ssn
 		$username = $_POST['usern'];
-		$query = $db->query('SELECT password FROM users WHERE username=$username');
+		$query = $db->query("SELECT password FROM users WHERE username='$username'");
 		$pw = $query->fetchColumn(0);
-		$incpw = $_POST['pw'];
-		echo($pw);
-		echo($incpw);
-		if($pw != $incpw) {
-			header("Location: login.html");
+		$incpw = $_POST['password'];
+		echo("On file: $pw");
+		echo("From user: $incpw");
+
+
+		if($pw == $incpw) {
+			$goto = "Location: ../indexLoggedIn.html";
 		}
 
 	    //disconnect from database
@@ -40,5 +43,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: ../indexLoggedIn.html");
+	header($goto);
 ?>
