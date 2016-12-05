@@ -24,8 +24,10 @@
 		$username = $_POST['usern'];
 		$query = $db->query('SELECT password FROM users WHERE username=$username');
 		$pw = $query->fetchColumn(0);
-
-		if($pw != $_POST['pw']) {
+		$incpw = $_POST['pw'];
+		echo($pw);
+		echo($incpw);
+		if($pw != $incpw) {
 			header("Location: login.html");
 		}
 
