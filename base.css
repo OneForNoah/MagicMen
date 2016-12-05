@@ -86,6 +86,14 @@ li:last-child {
   0 -2px 0 #000000;
 }
 
+#textbox {
+  border-radius: 15px 50px;
+    background: -webkit-linear-gradient(top left, #19270d, #25591f);
+    padding: 20px;
+    width: 52%;
+    height: 150px;
+}
+
 
 
 .w3-theme-l5 {color:#000 !important; background-color:#f0f0f0 !important}
