@@ -59,3 +59,10 @@ li:last-child {
   0 2px 0 #000000,
   0 -2px 0 #000000;
 }
+
+.floatleft {
+    float:left;
+}
+.floatright {
+    float:right;
+}
