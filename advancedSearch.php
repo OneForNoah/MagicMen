@@ -33,5 +33,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: login.html");
+	//header("Location: login.html");
 ?>
