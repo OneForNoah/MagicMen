@@ -1,7 +1,7 @@
 <?php
-      /*  try
+        try
         {
-                $required = array('name', 'usern', 'pw');
+                $required = array('deckTitle', 'usern');
                 $error = false;
                 foreach($required as $field) {
                         if (empty($_POST[$field])) {
@@ -9,18 +9,23 @@
                         }
                 }
                 if ($error) {
-                        echo "Name, Username, and Password are required.";
-                        header("Location:register.html");
-		}*/
+                        echo "Deck Title and Username are required";
+                        header("Location:newDeck.html");
+		}
 
-    $db = new PDO('sqlite:../database/user.db');
+    echo 'test0';
+    $db = new PDO('sqlite:./database/user.db');
+    echo 'test1';
 	    // Set errormode to exceptions
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $username = $db->query('SELECT id_user FROM users WHERE (id_user = $_POST['usern'])');
+    $un = $_POST['usern'];
+    $username = $db->query("SELECT id_user FROM users WHERE usern = '$un'");
     $db.close();
-    $db = new PDO('sqlite:../database/user.db');
-    $deckID = int rand (void);
+
+    echo 'test2';
+    $db = new PDO('sqlite:./database/mtgcard.db');
+    echo 'test3';
+    $deckID = rand();
     $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
     $stmt->bindParam(':deckID', $deckID);
     $stmt->bindParam(':playerID', $username);
