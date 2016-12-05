@@ -1,8 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <title>Magic: the UnGathering</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="../base.css">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 .w3-sidenav a,.w3-sidenav h4 {padding: 12px;}
@@ -21,13 +22,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <li><a href="index.html"><div id="header">MagicMen</div></a></li>
     <!-- <div class="w3-left"> -->
     <div>
-      <li><a href="#"><div id="navbar">Deck Builder</div></a></li>
+      <li><a href="deckbuilder.html"><div id="navbar">Deck Builder</div></a></li>
       <li><a href="playgame.html"><div id="navbar">Play a Game</div></a></li>
-      <li><a href="#"><div id="navbar">Search</div></a></li>
+      <li><a href="search.html"><div id="navbar">Search</div></a></li>
     </div>
     <div class="w3-right" id="navbar">
-      <li class="w3-hide-small"><a href="./registration/register.html" class="w3-hover-white" align="right">Register</a></li>
-      <li class="w3-hide-small"><a href="/registration/login.html" class="w3-hover-white" align="right">Login</a></li>
+      <li class="w3-hide-small"><a href="register.html" class="w3-hover-white" align="right">Register</a></li>
+      <li class="w3-hide-small"><a href="login.html" class="w3-hover-white" align="right">Login</a></li>
     </div>
   </ul>
 </div>
@@ -36,23 +37,26 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <p></p>
     </div>
   </div>
-
-  <div class="w3-row">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Heading</h1>
-      <p>This is a website to build and test Magic: the Gathering decks!</p>
-    </div>
-  </div>
-
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Heading</h1>
-      <p>Hello World</p>
+      <h2>Play a game</h2>
+      <P>Welcome to the deck Tester.
+        <br>
+        Select your deck and a format, then click "Find Game"
+        <br>
+        You will be matched with a similar opponent. 
     </div>
   </div>
-  <div class="w3-row w3-padding-64">
+<div class="w3-row w3-padding-64">
     <div class="w3-col w3-container">
-      <p></p>
+      <div class="dropdown">
+         <button onclick="myFunction()" class="dropbtn">  Your Decks</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+         </div>
+      </div>
     </div>
   </div>
 
@@ -64,7 +68,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     </h5>
     </div>
   </footer>
-
 <!-- END MAIN -->
 </div>
 

@@ -12,9 +12,9 @@
                         echo "Name, Username, and Password are required.";
                         header("Location:register.html");
 		}
-
+		echo "var/www/html/database/users.db";
 		//open the sqlite database file
-	    $db = new PDO('sqlite:./database/users.db');
+	    $db = new PDO('sqlite:.database/users.db');
 
 	    // Set errormode to exceptions
 	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
