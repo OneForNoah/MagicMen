@@ -14,7 +14,7 @@
 		}
 		echo "var/www/html/database/users.db";
 		//open the sqlite database file
-	    $db = new PDO('sqlite:.database/users.db');
+	    $db = new PDO('sqlite:../database/users.db');
 
 	    // Set errormode to exceptions
 	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,7 +22,7 @@
 
 	    //safely insert values into passengers table
 		//order matters (look at your schema) -- fname, mname, lname, ssn
-		$stmt = $db->prepare("INSERT INTO users (id, name, usern, pw) VALUES (:id, :name, :usern, :pw)");
+		$stmt = $db->prepare("INSERT INTO users (id_user, name, username, password) VALUES (:id, :name, :usern, :pw)");
 		$stmt->bindParam(':id', $id);
 		$stmt->bindParam(':name', $name);
 		$stmt->bindParam(':usern', $usern);
