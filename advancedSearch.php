@@ -1,5 +1,6 @@
 <?php
-
+	try
+	{
 		//open the sqlite database file
 	    $db = new PDO('sqlite:./database/mtgcard.db');
 
@@ -26,7 +27,6 @@
 
 	    //disconnect from database
 	    $db = null;
-	}
 	catch(PDOException $e)
 	{
 	    die('Exception : '.$e->getMessage());
