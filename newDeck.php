@@ -17,10 +17,17 @@
 	    // Set errormode to exceptions
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $query = $db->query('SELECT COUNT(id_user) FROM users');
+    $username = $db->query('SELECT id_user FROM users WHERE (id_user = $_POST['usern'])');
+    $db.close();
+    $db = new PDO('sqlite:../database/user.db');
+    $deckID = int rand (void);
+    $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
+    $stmt->bindParam(':deckID', $deckID);
+    $stmt->bindParam(':playerID', $username);
+    $stmt->bindParam(':deckName', $_POST['deckTitle']);
+    $stmt->bindParam(':deckSize', 60);
 
-
-	  //safely insert values into passengers table
+	/*  //safely insert values into passengers table
 		//order matters (look at your schema) -- fname, mname, lname, ssn
     $user = $db->query('SELECT max(id_user) FROM users')
     $db->close();
@@ -41,7 +48,7 @@
 		//echo($stmt);
 		//$db->exec($stmt);
 	    $stmt->execute();
-
+*/
 	        //disconnect from database
 	    $db = null;
 	}
@@ -51,5 +58,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: index.html");
+	header("Location: deckBuilder.html");
 ?>
