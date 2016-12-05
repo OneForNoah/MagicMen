@@ -1,0 +1,12 @@
+<?php
+	Open connection to users.db
+	QUERY users.db for this users id_user
+	store that in a variable that you can keep around
+	close that connection
+
+	open connection to mtgcard.db
+	insert deck info, with id_user as playerID, etc
+	close connection
+	
+	redirect
+>

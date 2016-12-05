@@ -1,52 +1,32 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
-echo "<table style='border: solid 1px black;'>";
-echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
 
-class TableRows extends RecursiveIteratorIterator { 
-	function __construct($it) { 
-		parent::__construct($it, self::LEAVES_ONLY); 
+		//open the sqlite database file
+	    $db = new PDO('sqlite:./database/mtgcard.db');
+
+	    // Set errormode to exceptions
+	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	    //safely insert values into passengers table
+		//order matters (look at your schema) -- fname, mname, lname, ssn
+		$stmt = $db->prepare('SELECT FROM users (id_user, name, username, password) VALUES (:id, :name, :usern, :pw);');
+		$stmt->bindParam(':id', $id);
+		$stmt->bindParam(':name', $name);
+		$stmt->bindParam(':usern', $usern);
+		$stmt->bindParam(':pw', $pw);
+
+		
+
+
+	    $stmt->execute();
+	    
+	        //disconnect from database
+	    $db = null;
+	}
+	catch(PDOException $e)
+	{
+	    die('Exception : '.$e->getMessage());
 	}
 
-	function current() {
-		return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
-	}
-
-	function beginChildren() { 
-		echo "<tr>"; 
-	} 
-
-	function endChildren() { 
-		echo "</tr>" . "\n";
-	} 
-} 
-
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDBPDO";
-
-try {
-	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$stmt = $conn->prepare("SELECT id, firstname, lastname FROM MyGuests"); 
-	$stmt->execute();
-
-    // set the resulting array to associative
-	$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-	foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
-		echo $v;
-	}
-}
-catch(PDOException $e) {
-	echo "Error: " . $e->getMessage();
-}
-$conn = null;
-echo "</table>";
+	//redirect user to another page now
+	header("Location: login.html");
 ?>
-
-</body>
-</html>
