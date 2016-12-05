@@ -28,13 +28,14 @@
 		$stmt->bindParam(':usern', $usern);
 		$stmt->bindParam(':pw', $pw);
 
-		$id = $db->query("SELECT max(id_user) FROM users");
+		$idnum = $db->query("SELECT max(id_user) FROM users");
+		$id = echo($idnum);
 		$name = $_POST['name'];
 		$usern = $_POST['usern'];
 		$pw = $_POST['pw'];
-		echo($stmt);
-		$db->exec($stmt);
-	    //$stmt->execute();
+		//echo($stmt);
+		//$db->exec($stmt);
+	    $stmt->execute();
 
 	        //disconnect from database
 	    $db = null;
