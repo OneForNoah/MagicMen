@@ -27,6 +27,7 @@
 
 	    //disconnect from database
 	    $db = null;
+	}
 	catch(PDOException $e)
 	{
 	    die('Exception : '.$e->getMessage());
