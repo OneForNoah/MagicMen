@@ -25,14 +25,13 @@
     echo 'test2';
     $db = new PDO('sqlite:./database/mtgcard.db');
     echo 'test3';
-    $deckID = rand();
+    //$deckID = rand();
     $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
     $stmt->bindParam(':deckID', $deckID);
     $stmt->bindParam(':playerID', $userID);
     $stmt->bindParam(':deckName', $_POST['deckTitle']);
     $stmt->bindParam(':deckSize', 60);
     $sdeckID = $deckID;
-    $
     $db = null;
 	/*  //safely insert values into passengers table
 		//order matters (look at your schema) -- fname, mname, lname, ssn
@@ -46,18 +45,22 @@
 		$stmt->bindParam(':name', $name);
 		$stmt->bindParam(':usern', $usern);
 		$stmt->bindParam(':pw', $pw);
+=======
+    $stmt->bindParam(':playerID', $playerID);
+    $stmt->bindParam(':deckName', $deckName);
+    $stmt->bindParam(':deckSize', $deckSize);
 
-		$idnum = $db->query("SELECT max(id_user) FROM users");
-		$id = echo($idnum);
-		$name = $_POST['name'];
-		$usern = $_POST['usern'];
-		$pw = $_POST['pw'];
-		//echo($stmt);
-		//$db->exec($stmt);
-	    $stmt->execute();
-*/
-	        //disconnect from database
-	    $db = null;
+    $idquery = $db->query("SELECT max(deckId) FROM DeckInfo");
+    $id =  $idquery->fetchColumn(0);
+    $id++;
+    echo($id);
+    $deckId=$id;
+    $playerID=$userid;
+    $deckName=$_POST['deckTitle'];
+    $deckSize=60;
+>>>>>>> ab40679b74af5ffbcfce528baa43fd19b75c8d0f
+
+    $db = null;
 	}
 	catch(PDOException $e)
 	{
