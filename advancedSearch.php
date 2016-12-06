@@ -30,7 +30,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	<div class="w3-row w3-padding-64">
 		<div class="w3-twothird w3-container">
 			<h2>Search Results</h2>
-			<script>
 			<?php
 			try
 			{
@@ -42,39 +41,129 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 	    		//safely insert values into passengers table
 				if(empty($_POST['power']) && empty($_POST['tough'])) {
-					$result = $db->prepare("SELECT * FROM creatures NATURAL JOIN nonCreatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
-					$result->execute();
+					$result = $db->query("SELECT * FROM nonCreatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
+
 					//$resultN = $db->query("SELECT FROM nonCreatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
-					$cards = $result->fetchAll();
 
-					echo "<table>";
-					echo "<tr><th>Name</th><th>Manacost</th><th>Type</th><th>Rules Text</th><th>Power</th><th>Toughness</th></tr>";
-
-
-					foreach( $cards as $row) {
-						echo "<tr>";
-						echo "<td>".$row['cardName']."</td>";
-						echo "<td>".$row['manacost']."</td>";
-						echo "<td>".$row['cardType']."</td>";
-						echo "<td>".$row['cardText']."</td>";
-						echo "<td>".$row['power']."</td>";
-						echo "<td>".$row['toughness']."</td>";
-						echo "</tr>";
-					}
-
-					echo "</table>";
+					echo '<table border="1">';
+					//loop through each tuple in result set
+								foreach($result as $tuple)
+								{
+									echo '<tr><td>';
+									echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[manacost]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[color]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardType]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardText]&nbsp;";
+									echo '</td>';
+									echo '</tr>';
+										//echo '<form action=".php" method="POST">';
+										//echo '<input type="submit" value="View Decklist"></form>';
+										//echo '</td></tr>';
+										//echo '<br>';
+								}
+					echo '</table>';
 
 				} else if(empty($_POST['power'])) {
-					$result = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND tough=$_POST[tough]");
-				//RETURN OUTPUt
+					$result = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND toughness=$_POST[tough]");
+					echo '<table border="1">';
+					//loop through each tuple in result set
+								foreach($result as $tuple)
+								{
+									echo '<tr><td>';
+									echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[manacost]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[color]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardType]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardText]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[power]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[toughness]&nbsp;";
+									echo '</td>';
+									echo '</tr>';
+								}
+					echo '</table>';
 
 				} else if(empty($_POST['tough'])) {
 					$result = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND power=$_POST[power]");
-				//RETURN OUTPUT
+					echo '<table border="1">';
+					//loop through each tuple in result set
+								foreach($result as $tuple)
+								{
+									echo '<tr><td>';
+									echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[manacost]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[color]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardType]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardText]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[power]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[toughness]&nbsp;";
+									echo '</td>';
+									echo '</tr>';
+								}
+					echo '</table>';
 
 				} else {
-					$result = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND power=$_POST[power] AND tough=$_POST[tough]");
-				//RETURN OUTPUT
+					$result = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' AND power=$_POST[power] AND toughness=$_POST[tough]");
+					echo '<table border="1">';
+					//loop through each tuple in result set
+								foreach($result as $tuple)
+								{
+									echo '<tr><td>';
+									echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[manacost]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[color]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardType]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[cardText]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[power]&nbsp;";
+									echo '</td>';
+									echo '<td>';
+									echo "&nbsp;$tuple[toughness]&nbsp;";
+									echo '</td>';
+									echo '</tr>';
+								}
+					echo '</table>';
 
 				}
 
@@ -89,7 +178,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	//redirect user to another page now
 	//header("Location: login.html");
 			?>
-			</script>
 		</div>
 	</div>
 </body>
