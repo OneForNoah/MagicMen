@@ -22,7 +22,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <li><a href="indexLoggedIn.html"><div id="header">MagicMen</div></a></li>
       <!-- <div class="w3-left"> -->
       <div>
-        <li><a href=deckBuilder.html><div id="navbar">Deck Builder</div></a></li>
+        <li><a href=deckBuilder.php><div id="navbar">Deck Builder</div></a></li>
         <li><a href="playgame.html"><div id="navbar">Play a Game</div></a></li>
         <li><a href="search.html"><div id="navbar">Search</div></a></li>
       </div>
@@ -30,13 +30,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   </div>
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h2>Build a deck.</h2>
+      <h2>New Deck?</h2>
       <a href="newDeck.html"><button>New Deck</button></a>
     </div>
   </div>
-  <div class="w3-row w3-padding-64">
+  <div class="w3-row w3-padding-8">
     <div class="w3-twothird w3-container">
-      <h2>Your Decks
+      <h2>Your Decks</h2>
         <?php
         try
         {
@@ -47,17 +47,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-
-          $result = $db->query("SELECT * FROM DeckInfo");
-
-          //$resultN = $db->query("SELECT FROM nonCreatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%'");
+          $result = $db->query("SELECT deckName FROM DeckInfo ORDER BY deckName;");
 
           echo '<table border="1">';
+          echo 'Deck Name';
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
             echo '<tr><td>';
-            echo "$tuple[deckID] $tuple[playerID] $tuple[deckName]";
+            echo "$tuple[deckName]";
+            echo '</td><td>';
+            echo '<form action="/deckEditor.php" method="POST">';
+            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckId'].'">';
+            echo '<input type="submit" value="Edit Deck"></form>';
             echo '</td></tr>';
           }
           echo '</table>';
@@ -76,14 +78,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
       </div>
     </div>
-  </div>
-</div>
 <footer id="myFooter">
   <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
     <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
       <p>
         All cards and art belongs to Wizards of the Coast.
-      </h5>
+      </h6>
     </div>
   </footer>
   <!-- END MAIN -->
