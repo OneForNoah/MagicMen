@@ -23,7 +23,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <!-- <div class="w3-left"> -->
       <div>
         <li><a href="deckBuilder.php"><div id="navbar">Deck Builder</div></a></li>
-        <li><a href="playgame.html"><div id="navbar">Play a Game</div></a></li>
+        <li><a href="playgame.php"><div id="navbar">Play a Game</div></a></li>
         <li><a href="search.html"><div id="navbar">Search</div></a></li>
       </div>
     </ul>
