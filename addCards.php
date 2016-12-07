@@ -15,8 +15,12 @@
   foreach($cards as $target)
   {
     $copies = substr($target, 0, 1);
-    $target = substr($target, 2);
+    $cs = $db->query("SELECT deckSize FROM DeckInfo WHERE deckID='$deck_id';");
+    $currSize = $cs->fetchColumn(0);
+    $newSize = $currSize + $copies;
+    $db->query("UPDATE DeckInfo SET deckSize=$newSize; WHERE deckID='$deck_id'");
 
+    $target = substr($target, 2);
     $target= trim(preg_replace('/\s\s+/', '', $target));
 
     $stmt = $db->prepare('INSERT INTO Decklists (deckID, playerID, cardID, cardName, numOf) VALUES (:deckID, :playerID, :cardID, :cardName, :numOf);');
@@ -29,7 +33,7 @@
     $deckID=$deck_id;
     $playid = $db->query("SELECT playerID FROM DeckInfo WHERE deckID='$deckID';");
     $playerID = $playid->fetchColumn(0);
-
+  
     $idcre = $db->query("SELECT cardID, cardName FROM creatures WHERE cardName='$target';");
     $rescobj = $idcre->fetch(PDO::FETCH_OBJ);
     $resccid = $rescobj->cardID;
