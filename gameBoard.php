@@ -30,7 +30,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   </div>
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <a href="newDeck.html"><button>draw a card</button></a>
+    <!--  <a href="newDeck.html"><button>draw a card</button></a>-->
       <?php
       try
       {
@@ -41,30 +41,40 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         //safely insert values into passengers table
-        $deck = $db->query("SELECT * FROM Decklists WHERE deckID=1;");
+        $deck = $db->query("SELECT cardID FROM Decklists WHERE deckID=1;");
         //shuffle($deck);
+        echo $deck->fetchColumn(0);
         $rows = $db->query("SELECT deckSize FROM DeckInfo WHERE deckID=1;");
-        for($i = 1; $i <= $rows; $i++) {
+        for($i = 1; $i <= $rows->fetchColumn(0); $i++) {
+
           //get the name of the current card
           $name = $db->query("SELECT cardName FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          echo  $name->fetchColumn(0);
           //get the manacost
           $mana = $db->query("SELECT manacost FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          echo  $mana->fetchColumn(0);
           //get the color
           $color = $db->query("SELECT color FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          echo  $color->fetchColumn(0);
           //get the cardType
           $type = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          echo  $type->fetchColumn(0);
           //get the get the cardText
           $text = $db->query("SELECT cardText FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          echo  $text->fetchColumn(0);
           //if a creature, get power and toughness too!!
-        //  $doIfStatement = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$deck[cardID]' AND LIKE '%creature'%");
-          //if()
+          //  $doIfStatement = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$deck[cardID]' AND LIKE '%creature'%");
+
           //get the power
           $pow = $db->query("SELECT power FROM creatures WHERE cardID='$deck[cardID]'");
           //get the toughness
           $tough = $db->query("SELECT toughness FROM creatures WHERE cardID='$deck[cardID]'");
           //put everything together in one variable with line breaks where appropriate
-          $total = $name + "\r\n" + $mana + "\r\n" + $type + "  " + $color + "\r\n" + $pow + "/" + $tough + "\r\n" + $text;
-
+          if(empty($pow)){
+            $total = $name + "\r\n" + $mana + "\r\n" + $type + "  " + $color + "\r\n" + $text;
+          } else {
+            $total = $name + "\r\n" + $mana + "\r\n" + $type + "  " + $color + "\r\n" + $pow + "/" + $tough + "\r\n" + $text;
+          }
           echo '<head>';
           echo '<meta charset="utf-8" />';
           echo '<title>jQuery UI Draggable - Default functionality</title>';
