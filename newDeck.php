@@ -37,7 +37,7 @@
     $deckID=$id;
     $playerID=$user_id;
     $deckName=$_POST['deckTitle'];
-    $deckSize=60;
+    $deckSize=0;
 
     $stmt->execute();
 
