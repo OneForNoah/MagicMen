@@ -49,5 +49,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: deckEditor.html");
+	header("Location: ./deckEditor.php");
 ?>

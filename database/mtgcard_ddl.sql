@@ -44,6 +44,5 @@ create table DeckInfo (
 create table Decklists (
   deckID integer,
   cardID integer,
-  numOf integer,
-  primary key (deckID, cardID)
+  numOf integer
 );

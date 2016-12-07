@@ -22,7 +22,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <li><a href="indexLoggedIn.html"><div id="header">MagicMen</div></a></li>
       <!-- <div class="w3-left"> -->
       <div>
-        <li><a href=deckBuilder.php><div id="navbar">Deck Builder</div></a></li>
+        <li><a href="deckBuilder.php"><div id="navbar">Deck Builder</div></a></li>
         <li><a href="playgame.php"><div id="navbar">Play a Game</div></a></li>
         <li><a href="search.html"><div id="navbar">Search</div></a></li>
       </div>
@@ -47,7 +47,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT * FROM DeckInfo ORDER BY deckName;");
+          $result = $db->query("SELECT deckID, deckName FROM DeckInfo ORDER BY deckName;");
 
           echo '<table border="1">';
           //loop through each tuple in result set
@@ -56,7 +56,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             echo '<tr><td>';
             echo "$tuple[deckName]";
             echo '</td><td>';
-            echo '<form action="deckEditor2.php" method="POST">';
+            echo '<form action="deckEditor.php" method="POST">';
             echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
             echo '<input type="submit" value="Edit Deck"></form>';
             echo '</td></tr>';
