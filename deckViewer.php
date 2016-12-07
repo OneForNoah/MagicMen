@@ -28,18 +28,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
     </ul>
   </div>
+  <br>
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h2>New Deck?</h2>
-      <a href="newDeck.php"><button>New Deck</button></a>
-    </div>
-  </div>
-  <div class="w3-row w3-padding-8">
-    <div class="w3-twothird w3-container">
-      <h2>Your Decks</h2>
+      Your deck ID is 
         <?php
         try
         {
+          $deck_id = $_POST['deck_id'];
+          echo $deck_id;
+          echo '<form action="deckEditor.php" method="POST">';
+          echo '<input type="hidden" name="deck_id" value="$deck_id">';
+          echo '<input type="submit" value="Edit Deck"></form>';
+
           //open the sqlite database file
           $db = new PDO('sqlite:./database/mtgcard.db');
 
@@ -47,20 +48,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT deckID, deckName FROM DeckInfo ORDER BY deckName;");
+          $result = $db->query("SELECT cardID FROM Decklists WHERE deckID = $deck_id");
 
           echo '<table border="1">';
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
             echo '<tr><td>';
-            echo "$tuple[deckName]";
-            echo '</td><td>';
-            echo "DeckID is $tuple[deckID]";
-            echo '</td><td>';
-            echo '<form action="deckViewer.php" method="POST">';
-            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
-            echo '<input type="submit" value="View Deck"></form>';
+            echo "$tuple[cardID]";
             echo '</td></tr>';
           }
           echo '</table>';
@@ -89,31 +84,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   </footer>
   <!-- END MAIN -->
 </div>
-
-<script>
-// Get the Sidenav
-var mySidenav = document.getElementById("mySidenav");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidenav, and add overlay effect
-function w3_open() {
-  if (mySidenav.style.display === 'block') {
-    mySidenav.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidenav.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidenav with the close button
-function w3_close() {
-  mySidenav.style.display = "none";
-  overlayBg.style.display = "none";
-}
-</script>
 
 </body>
 </html>
