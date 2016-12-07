@@ -47,7 +47,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT deckName FROM DeckInfo ORDER BY deckName;");
+          $result = $db->query("SELECT * FROM DeckInfo ORDER BY deckName;");
 
           echo '<table border="1">';
           echo 'Deck Name';
@@ -58,7 +58,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             echo "$tuple[deckName]";
             echo '</td><td>';
             echo '<form action="/deckEditor.php" method="POST">';
-            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckId'].'">';
+            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
             echo '<input type="submit" value="Edit Deck"></form>';
             echo '</td></tr>';
           }

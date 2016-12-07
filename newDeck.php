@@ -13,35 +13,34 @@
                         header("Location:newDeck.html");
 		}
 
-    $db = new PDO('sqlite:./database/users.db');
+    $db = new PDO('sqlite:./database/mtgcard.db');
 
     // Set errormode to exceptions
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $un = $_POST['usern'];
-    $id = $db->query("SELECT id_user FROM users WHERE username = '$un';");
+    $id = $db->query("SELECT playerId FROM Players WHERE playerName = '$un';");
     $user_id = $id->fetchColumn(0);
     if(empty($user_id)) {
         die('Exception : need real user name');
     }
-    $db = null;
-
-    $db = new PDO('sqlite:./database/mtgcard.db');
 
     $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
     $stmt->bindParam(':deckID', $deckID);
     $stmt->bindParam(':playerID', $playerID);
     $stmt->bindParam(':deckName', $deckName);
     $stmt->bindParam(':deckSize', $deckSize);
-
     $idquery = $db->query("SELECT max(deckId) FROM DeckInfo");
-    $id =  $idquery->fetchColumn(0);
+    $id = $idquery->fetchColumn(0);
     $id++;
 
     $deckID=$id;
     $playerID=$user_id;
     $deckName=$_POST['deckTitle'];
     $deckSize=60;
+
+    $stmt->execute();
+
     $db = null;
 	}
 	catch(PDOException $e)
@@ -50,5 +49,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: deckBuilder.php");
+	header("Location: deckEditor.html");
 ?>
