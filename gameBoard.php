@@ -32,35 +32,41 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird w3-container">
     <!--  <a href="newDeck.html"><button>draw a card</button></a>-->
       <?php
-      try
-      {
+      try {
+
         //open the sqlite database file
         $db = new PDO('sqlite:./database/mtgcard.db');
+        //$query = $db->query("UPDATE DeckInfo SET deckSize=10 WHERE deckID=2;");
 
         // Set errormode to exceptions
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         //safely insert values into passengers table
-        $deck = $db->query("SELECT cardID FROM Decklists WHERE deckID=1;");
+        $deck = $db->query("SELECT cardID FROM Decklists WHERE deckID=$_POST[deck_id];");
         //shuffle($deck);
-        echo $deck->fetchColumn(0);
-        $rows = $db->query("SELECT deckSize FROM DeckInfo WHERE deckID=1;");
-        for($i = 1; $i <= $rows->fetchColumn(0); $i++) {
-
+        $rows = $db->query("SELECT deckSize FROM DeckInfo WHERE deckID=$_POST[deck_id];");
+          echo $rows->fetchColumn(0);
+        for($i = 1; $i <= 10 /*$rows->fetchColumn(0)*/; $i++) {
+          $cardID = $db->query("SELECT cardID FROM Decklists WHERE deckID=$_POST[deck_id];");
+            echo 'test3';
+          //echo $cardID->fetchColumn(0);
+            echo 'test2';
           //get the name of the current card
-          $name = $db->query("SELECT cardName FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          $name = $db->query('SELECT cardName FROM nonCreatures NATURAL JOIN creatures WHERE cardID= $cardID->fetchColumn(0)');
+            echo 'test1';
           echo  $name->fetchColumn(0);
+            echo 'test4';
           //get the manacost
-          $mana = $db->query("SELECT manacost FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          $mana = $db->query("SELECT manacost FROM nonCreatures NATURAL JOIN creatures WHERE cardID=$cardID");
           echo  $mana->fetchColumn(0);
           //get the color
-          $color = $db->query("SELECT color FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          $color = $db->query("SELECT color FROM nonCreatures NATURAL JOIN creatures WHERE cardID=$cardID");
           echo  $color->fetchColumn(0);
           //get the cardType
-          $type = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          $type = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID=$cardID");
           echo  $type->fetchColumn(0);
           //get the get the cardText
-          $text = $db->query("SELECT cardText FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$card[cardID]'");
+          $text = $db->query("SELECT cardText FROM nonCreatures NATURAL JOIN creatures WHERE cardID=$cardID");
           echo  $text->fetchColumn(0);
           //if a creature, get power and toughness too!!
           //  $doIfStatement = $db->query("SELECT cardType FROM nonCreatures NATURAL JOIN creatures WHERE cardID='$deck[cardID]' AND LIKE '%creature'%");
@@ -98,6 +104,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
             $db = null;
           }
+            //echo 'test3';
         }
         catch(PDOException $e)
         {

@@ -31,6 +31,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird w3-container">
       <h2>Edit your decks</h2><br>
       <h4>Each card must be typed exactly how it is spelled, and on a different line from the previous card</h4>
+      <h4>Begin each line with the number of copies of that card you want to add</h4>
       <div class="col-md-8">
 
         <FORM METHOD=POST ACTION="addCards.php">
