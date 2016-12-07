@@ -32,14 +32,25 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird w3-container">
       <h2>Edit your decks</h2><br>
       <h4>Each card must be typed exactly how it is spelled, and on a different line from the previous card</h4>
-        <div class="col-md-8">
-          <FORM METHOD=POST ACTION="deckEditor.php">
-            <input name="deckID" placeholder="deckID" size="100">
-            <textarea name = "cardList" placeholder="Enter card names here"rows="10" cols="100"></textarea>
-          <P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>
-          </FORM>
-        </div>
+      <div class="col-md-8">
+        <?php
+        try
+        {
+            $deckID = $_POST['deck_id'];
+            echo '<FORM METHOD=POST>':
+            echo '<input type="hidden" name="deckID" value="'.$deckID.'">';
+            echo '<textarea name = "cardList" placeholder="Enter card names here"rows="10" cols="100"></textarea>';
+            echo '<P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>';
+            echo '</FORM>';
+        }
+        catch(PDOException $e)
+        {
+         die('Exception : '.$e->getMessage());
+        }
+       ?>
+        <!--input name="deckID" placeholder="deckID" size="100">-->
       </div>
+    </div>
     <footer id="myFooter">
       <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
         <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
