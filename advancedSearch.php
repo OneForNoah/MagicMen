@@ -96,10 +96,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 						echo "&nbsp;$tuple[toughness]&nbsp;";
 						echo '</td>';
 						echo '</tr>';
-										//echo '<form action=".php" method="POST">';
-										//echo '<input type="submit" value="View Decklist"></form>';
-										//echo '</td></tr>';
-										//echo '<br>';
 					}
 					echo '</table>';
 
