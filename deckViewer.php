@@ -40,6 +40,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           echo '<form action="deckEditor.php" method="POST">';
           echo '<input type="hidden" name="deck_id" value="$deck_id">';
           echo '<input type="submit" value="Edit Deck"></form>';
+          //echo '<form action="deckBuilder.php">';
+          //echo '<input type="submit" value="Go Back"></form>';
 
           //open the sqlite database file
           $db = new PDO('sqlite:./database/mtgcard.db');
@@ -48,70 +50,70 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT cardID, cardName FROM Decklists WHERE deckID = '$deck_id'");
+          $result = $db->query("SELECT cardID, cardName FROM Decklists WHERE deckID = '$deck_id' ORDER BY cardName");
 
           echo '<table border="1">';
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
             $cncre = $db->query("SELECT cardName, manacost, color, cardType, cardText, power, toughness FROM creatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
-            // $res1 = $cncre->fetch(PDO::FETCH_OBJ);
-            // $resid1 = $res1->cardID;
-            // $resn1 = $res1->cardName;
             
             $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
-            // $res2 = $cncre->fetch(PDO::FETCH_OBJ);
-            // $resid2 = $res2->cardID;
-            // $resn2 = $res2->cardName;
-
-            if(empty($cncre) && empty($cnnon)) {
-              die("Something Broke. Its on us. Please retry later :(");
-            } else if(empty($cnnon)) {
-              foreach($cncre as $tuple)
+              foreach($cncre as $tuple2)
               {
-                echo '<tr><td>';
-                echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+                $numRes =  $db->query("SELECT numOf FROM Decklists WHERE deckID = '$deck_id' AND cardName='$tuple2[cardName]'");
+                $num = $numRes->fetchColumn(0);
+                echo '<tr>';
+                echo '<td>';
+                echo "&nbsp;$num&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[manacost]&nbsp;";
+                echo "&nbsp;<font color='blue'>$tuple2[cardName]</font>&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[color]&nbsp;";
+                echo "&nbsp;$tuple2[manacost]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[cardType]&nbsp;";
+                echo "&nbsp;$tuple2[color]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[cardText]&nbsp;";
+                echo "&nbsp;$tuple2[cardType]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[power]&nbsp;";
+                echo "&nbsp;$tuple2[cardText]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[toughness]&nbsp;";
+                echo "&nbsp;$tuple2[power]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple2[toughness]&nbsp;";
                 echo '</td>';
                 echo '</tr>';
               }
-            } else {
-              foreach($cnnon as $tuple)
+              foreach($cnnon as $tuple2)
               {
-                echo '<tr><td>';
-                echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+                $numRes =  $db->query("SELECT numOf FROM Decklists WHERE deckID = '$deck_id' AND cardName='$tuple2[cardName]'");
+                $num = $numRes->fetchColumn(0);
+                echo '<tr>';
+                echo '<td>';
+                echo "&nbsp;$num&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[manacost]&nbsp;";
+                echo "&nbsp;<font color='blue'>$tuple2[cardName]</font>&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[color]&nbsp;";
+                echo "&nbsp;$tuple2[manacost]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[cardType]&nbsp;";
+                echo "&nbsp;$tuple2[color]&nbsp;";
                 echo '</td>';
                 echo '<td>';
-                echo "&nbsp;$tuple[cardText]&nbsp;";
+                echo "&nbsp;$tuple2[cardType]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple2[cardText]&nbsp;";
                 echo '</td></tr>';
               }
-            }
           }
           echo '</table>';
 
@@ -124,7 +126,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         }
 
         //redirect user to another page now
-        //header("Location: login.html");
         ?>
 
       </div>

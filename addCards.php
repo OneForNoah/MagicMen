@@ -24,7 +24,6 @@
     $stmt->bindParam(':cardName', $cardName);
     $stmt->bindParam(':numOf', $numOf);
 
-
     $deckID=$deck_id;
     $playid = $db->query("SELECT playerID FROM DeckInfo WHERE deckID='$deckID';");
     $playerID = $playid->fetchColumn(0);
@@ -38,19 +37,12 @@
     $resnobj = $idnonc->fetch(PDO::FETCH_OBJ);
     $resncid = $resnobj->cardID;
     $resnccn = $resnobj->cardName;
-
-    echo $resccid;
-    echo $resccn;
-    echo $resncid;
-    echo $resnccn;
     
     if(empty($resncid) && empty($resccid)) {
       die("Exception : '$target' Card name not valid");
     } else if(empty($resncid)) {
       $cardID = $resccid;
-      echo $cardID;
       $cardName = $resccn;
-      echo $cardName;
     } else {
       $cardID = $resncid;
       $cardName = $resnccn;
@@ -59,7 +51,6 @@
     $numOf = $copies;
 
     for($i = 0; $i<$copies; $i++ ) {
-      echo 'Executing...';
       $stmt->execute();
     }
   }
@@ -71,5 +62,5 @@
     die('Exception : '.$e->getMessage());
   }
 
-  //header("Location: ./deckBuilder.php");
+  header("Location: ./deckBuilder.php");
 ?>
