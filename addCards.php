@@ -29,35 +29,37 @@
     $playid = $db->query("SELECT playerID FROM DeckInfo WHERE deckID='$deckID';");
     $playerID = $playid->fetchColumn(0);
 
-    $idnonc = $db->query("SELECT cardID, cardName FROM nonCreatures WHERE cardName='$target';");
     $idcre = $db->query("SELECT cardID, cardName FROM creatures WHERE cardName='$target';");
-    //echo $idcre->fetchColumn(0);
+    $rescobj = $idcre->fetch(PDO::FETCH_OBJ);
+    $resccid = $rescobj->cardID;
+    $resccn = $rescobj->cardName;
 
-    $res = $idnonc->fetch(PDO::FETCH_OBJ);
-    if(!isset($result->id_email)) {
+    $idnonc = $db->query("SELECT cardID, cardName FROM nonCreatures WHERE cardName='$target';");
+    $resnobj = $idnonc->fetch(PDO::FETCH_OBJ);
+    $resncid = $resnobj->cardID;
+    $resnccn = $resnobj->cardName;
+
+    echo $resccid;
+    echo $resccn;
+    echo $resncid;
+    echo $resnccn;
+    
+    if(empty($resncid) && empty($resccid)) {
       die("Exception : '$target' Card name not valid");
-    } else if( $idcre->rowCount() > 0 ) {
-      echo "made it into creature insert";
-      foreach($idcre as $tuple)
-      {
-        $cardID = $tuple['cardID'];
-        echo $cardID;
-        $cardName = $tuple['cardName'];
-        echo $cardName;
-      }
+    } else if(empty($resncid)) {
+      $cardID = $resccid;
+      echo $cardID;
+      $cardName = $resccn;
+      echo $cardName;
     } else {
-      echo "made it into noncreature insert";
-      foreach($idnonc as $tuple)
-      {
-        $cardID = $tuple['cardID'];
-        echo $cardID;
-        $cardName = $tuple['cardName'];
-        echo $cardName;
-      }
+      $cardID = $resncid;
+      $cardName = $resnccn;
     }
-    //$num = $db->query("SELECT numOf FROM Decklists WHERE cardID='$cardID' AND deckID='$deckID';");
-    $numOf = 1; //$num->fetchColumn(0);
+
+    $numOf = $copies;
+
     for($i = 0; $i<$copies; $i++ ) {
+      echo 'Executing...';
       $stmt->execute();
     }
   }

@@ -55,11 +55,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           foreach($result as $tuple)
           {
             $cncre = $db->query("SELECT cardName, manacost, color, cardType, cardText, power, toughness FROM creatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
+            // $res1 = $cncre->fetch(PDO::FETCH_OBJ);
+            // $resid1 = $res1->cardID;
+            // $resn1 = $res1->cardName;
+            
             $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
+            // $res2 = $cncre->fetch(PDO::FETCH_OBJ);
+            // $resid2 = $res2->cardID;
+            // $resn2 = $res2->cardName;
+
             if(empty($cncre) && empty($cnnon)) {
               die("Something Broke. Its on us. Please retry later :(");
             } else if(empty($cnnon)) {
-              foreach($resultN as $tuple)
+              foreach($cncre as $tuple)
               {
                 echo '<tr><td>';
                 echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
@@ -121,14 +129,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
       </div>
     </div>
-<footer id="myFooter">
-  <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
-    <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
-      <p>
-        All cards and art belongs to Wizards of the Coast.
-      </h6>
-    </div>
-  </footer>
   <!-- END MAIN -->
 </div>
 
