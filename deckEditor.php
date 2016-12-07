@@ -71,18 +71,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $deckID=$id;
           $cardID = $db->query("SELECT cardID FROM nonCreatures NATURAL JOIN creatures WHERE cardName='$target'");
           $numOf = $db->query("SELECT numOf FROM Decklists WHERE cardName='$target'");
-        if($numOf<4) {//if there are already 4 copies of this card then do not put it into the deck
-          $stmt->execute();
+          if($numOf<4) {//if there are already 4 copies of this card then do not put it into the deck
+            $stmt->execute();
+          }
         }
-      }
-      $db = null;
+        $db = null;
 
+      }
+      catch(PDOException $e)
+      {
+      die('Exception : '.$e->getMessage());
     }
-    catch(PDOException $e)
-    {
-     die('Exception : '.$e->getMessage());
-   }
-   ?>
+    ?>
    <!--input name="deckID" placeholder="deckID" size="100">-->
  </div>
 </div>
