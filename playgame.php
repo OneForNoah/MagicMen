@@ -12,7 +12,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   padding-bottom: 12px;
 }
 </style>
-<body>
+<body style="background-image:url('playgamebackground.jpg')">
 
   <!-- Navbar -->
   <div class="w3-top">
@@ -28,48 +28,52 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
     </ul>
   </div>
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h2>Your Decks</h2>
-        <?php
-        try
-        {
-          //open the sqlite database file
-          $db = new PDO('sqlite:./database/mtgcard.db');
 
-          // Set errormode to exceptions
-          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-          //safely insert values into passengers table
-          $result = $db->query("SELECT * FROM DeckInfo ORDER BY deckName;");
-
-          echo '<table border="1">';
-          echo 'Deck Name';
-          //loop through each tuple in result set
-          foreach($result as $tuple)
+  <br><br><br><br><br>
+  <div id="textbox">
+    <div class="w3-row w3-padding-64">
+      <div class="w3-twothird w3-container">
+        <h2>Your Decks</h2>
+          <?php
+          try
           {
-            echo '<tr><td>';
-            echo "$tuple[deckName]";
-            echo '</td><td>';
-            echo '<form action="/gameBoard.php" method="POST">';
-            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
-            echo '<input type="submit" value="Select Deck"></form>';
-            echo '</td></tr>';
+            //open the sqlite database file
+            $db = new PDO('sqlite:./database/mtgcard.db');
+
+            // Set errormode to exceptions
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //safely insert values into passengers table
+            $result = $db->query("SELECT * FROM DeckInfo ORDER BY deckName;");
+
+            echo '<table border="1">';
+            echo 'Deck Name';
+            //loop through each tuple in result set
+            foreach($result as $tuple)
+            {
+              echo '<tr><td>';
+              echo "$tuple[deckName]";
+              echo '</td><td>';
+              echo '<form action="/gameBoard.php" method="POST">';
+              echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
+              echo '<input type="submit" value="Select Deck"></form>';
+              echo '</td></tr>';
+            }
+            echo '</table>';
+
+            //disconnect from database
+            $db = null;
           }
-          echo '</table>';
+          catch(PDOException $e)
+          {
+            die('Exception : '.$e->getMessage());
+          }
 
-          //disconnect from database
-          $db = null;
-        }
-        catch(PDOException $e)
-        {
-          die('Exception : '.$e->getMessage());
-        }
+          //redirect user to another page now
+          //header("Location: login.html");
+          ?>
 
-        //redirect user to another page now
-        //header("Location: login.html");
-        ?>
-
+        </div>
       </div>
     </div>
 <footer id="myFooter">

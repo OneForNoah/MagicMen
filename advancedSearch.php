@@ -11,7 +11,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	padding-bottom: 12px;
 }
 </style>
-<body>
+<body style="background-image:url('Trail-of-Evidence-Shadows-over-Innistrad-Art.jpg')">
 
 	<!-- Navbar -->
 	<div class="w3-top">
@@ -48,7 +48,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 					$resultN = $db->query("SELECT * FROM creatures WHERE cardName LIKE '%$_POST[name]%' AND color LIKE '%$_POST[color]%' AND cardType LIKE '%$_POST[type]%' AND cardText LIKE '%$_POST[ruletext]%' ORDER BY cardName");
 
-					echo '<table border="1">';
+					echo '<table border="1" bgcolor="white">';
 					//loop through each tuple in result set
 					foreach($resultC as $tuple)
 					{

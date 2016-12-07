@@ -52,7 +52,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           //safely insert values into passengers table
           $result = $db->query("SELECT cardID, cardName FROM Decklists WHERE deckID = '$deck_id' ORDER BY cardName");
 
-          echo '<table border="1">';
+          echo '<table border="1" bgcolor="white">';
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
