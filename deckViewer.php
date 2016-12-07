@@ -54,9 +54,56 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
-            echo '<tr><td>';
-            echo "$tuple[cardID]";
-            echo '</td></tr>';
+            $cncre = $db->query("SELECT cardName, manacost, color, cardType, cardText, power, toughness FROM creatures WHERE cardID = '$tuple[cardID]'");
+            $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]'");
+            if(empty($cncre) && empty($cnnon)) {
+              die("Something Broke. Its on us. Please retry later :(");
+            } else if(empty($cnnon)) {
+              foreach($resultN as $tuple)
+              {
+                echo '<tr><td>';
+                echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[manacost]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[color]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[cardType]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[cardText]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[power]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[toughness]&nbsp;";
+                echo '</td>';
+                echo '</tr>';
+              }
+            } else {
+              foreach($cnnon as $tuple)
+              {
+                echo '<tr><td>';
+                echo "&nbsp;<font color='blue'>$tuple[cardName]</font>&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[manacost]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[color]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[cardType]&nbsp;";
+                echo '</td>';
+                echo '<td>';
+                echo "&nbsp;$tuple[cardText]&nbsp;";
+                echo '</td></tr>';
+              }
+            }
           }
           echo '</table>';
 

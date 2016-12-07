@@ -21,15 +21,15 @@
 
 
     $deckID=$deck_id;
-    echo $target;
-    $idcre = $db->query('SELECT cardID FROM creatures  WHERE cardName="$target"');
-    $idnonc = $db->query('SELECT cardID FROM creatures  WHERE cardName="$target"');
-    if(empty($idcre)) {
-      $cardID = $idnonc->fetchColumn(0);
-    } else {
+    $idcre = $db->query("SELECT cardID FROM creatures WHERE cardName='$target'");
+    $idnonc = $db->query("SELECT cardID FROM nonCreatures WHERE cardName='$target'");
+    if(empty($idcre) && empty($idnonc)) {
+      die("Exception : '$target' Card name not valid");
+    } else if(empty($idnonc)) {
       $cardID = $idcre->fetchColumn(0);
+    } else {
+      $cardID = $idnonc->fetchColumn(0);
     }
-    echo $cardID;
     //$num = $db->query("SELECT numOf FROM Decklists WHERE cardID='$cardID' AND deckID='$deckID';");
     $numOf = 1; //$num->fetchColumn(0);
 
