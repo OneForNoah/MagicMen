@@ -40,7 +40,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </FORM>
             <!--input name="deckID" placeholder="deckID" size="100">-->
       </div>
-    </div>s
+    </div>
   <footer id="myFooter">
     <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
       <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.

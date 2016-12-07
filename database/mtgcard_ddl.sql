@@ -45,6 +45,7 @@ create table Decklists (
   deckID integer,
   playerID integer,
   cardID integer,
+  cardName text,
   numOf integer,
   foreign key (deckID, playerID) references DeckInfo(deckID, playerID)
     on update cascade

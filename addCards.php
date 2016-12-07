@@ -10,29 +10,42 @@
   if(empty($deck_id)) {
     die('Exception : need real deck ID');
   }
-  $cards = explode("\n", $_POST['cardList']);
+  $cards = explode('\n', $_POST['cardList']);
 
   foreach($cards as $target)
   {
-    $stmt = $db->prepare('INSERT INTO Decklists (deckID, cardID, numOf) VALUES (:deckID, :cardID, :numOf);');
+    $stmt = $db->prepare('INSERT INTO Decklists (deckID, playerID, cardID, cardName, numOf) VALUES (:deckID, :playerID, :cardID, :cardName, :numOf);');
     $stmt->bindParam(':deckID', $deckID);
+    $stmt->bindParam(':playerID', $playerID);
     $stmt->bindParam(':cardID', $cardID);
+    $stmt->bindParam(':cardName', $cardName);
     $stmt->bindParam(':numOf', $numOf);
 
 
     $deckID=$deck_id;
-    $idcre = $db->query("SELECT cardID FROM creatures WHERE cardName='$target'");
-    $idnonc = $db->query("SELECT cardID FROM nonCreatures WHERE cardName='$target'");
-    if(empty($idcre) && empty($idnonc)) {
+    $playid = $db->query("SELECT playerID FROM DeckInfo WHERE deckID='$deckID';");
+    $playerID = $playid->fetchColumn(0);
+
+    $idnonc = $db->query("SELECT cardID, cardName FROM nonCreatures WHERE cardName='$target';");
+    $idcre = $db->query("SELECT cardID, cardName FROM creatures WHERE cardName='$target';");
+    //echo $idcre->fetchColumn(0);
+    if(empty($idcre->fetchColumn(0)) && empty($idnonc->fetchColumn(0))) {
       die("Exception : '$target' Card name not valid");
     } else if(empty($idnonc)) {
-      $cardID = $idcre->fetchColumn(0);
+      foreach($idcre as $tuple)
+      {
+        $cardID = $tuple['cardID'];
+        $cardName = $tuple['cardName'];
+      }
     } else {
-      $cardID = $idnonc->fetchColumn(0);
+      foreach($idnonc as $tuple)
+      {
+        $cardID = $tuple['cardID'];
+        $cardName = $tuple['cardName'];
+      }
     }
     //$num = $db->query("SELECT numOf FROM Decklists WHERE cardID='$cardID' AND deckID='$deckID';");
     $numOf = 1; //$num->fetchColumn(0);
-
     $stmt->execute();
   }
   $db = null;
@@ -43,5 +56,5 @@
     die('Exception : '.$e->getMessage());
   }
 
-  header("Location: ./deckEditor.php");
+  header("Location: ./deckBuilder.php");
 ?>

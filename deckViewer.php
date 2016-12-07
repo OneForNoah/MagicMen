@@ -48,14 +48,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT cardID FROM Decklists WHERE deckID = '$deck_id'");
+          $result = $db->query("SELECT cardID, cardName FROM Decklists WHERE deckID = '$deck_id'");
 
           echo '<table border="1">';
           //loop through each tuple in result set
           foreach($result as $tuple)
           {
-            $cncre = $db->query("SELECT cardName, manacost, color, cardType, cardText, power, toughness FROM creatures WHERE cardID = '$tuple[cardID]'");
-            $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]'");
+            $cncre = $db->query("SELECT cardName, manacost, color, cardType, cardText, power, toughness FROM creatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
+            $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
             if(empty($cncre) && empty($cnnon)) {
               die("Something Broke. Its on us. Please retry later :(");
             } else if(empty($cnnon)) {
