@@ -13,18 +13,14 @@
                         header("Location:newDeck.html");
 		}
 
-    echo 'test0';
     $db = new PDO('sqlite:./database/users.db');
-    echo 'test1';
 	    // Set errormode to exceptions
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $un = $_POST['usern'];
     $userID = $db->query("SELECT id_user FROM users WHERE username = '$un'");
     $db = null;
 
-    echo 'test2';
     $db = new PDO('sqlite:./database/mtgcard.db');
-    echo 'test3';
     //$deckID = rand();
     $stmt = $db->prepare('INSERT INTO DeckInfo (deckID, playerID, deckName, deckSize) VALUES (:deckID, :playerID, :deckName, :deckSize);');
     $stmt->bindParam(':deckID', $deckID);
