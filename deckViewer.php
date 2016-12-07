@@ -12,7 +12,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   padding-bottom: 12px;
 }
 </style>
-<body>
+<body style="background-image:url('deckviewerbackground.jpg')">
 
   <!-- Navbar -->
   <div class="w3-top">
@@ -31,7 +31,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <br>
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      Your deck ID is 
+      Your deck ID is
         <?php
         try
         {
@@ -58,7 +58,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             // $res1 = $cncre->fetch(PDO::FETCH_OBJ);
             // $resid1 = $res1->cardID;
             // $resn1 = $res1->cardName;
-            
+
             $cnnon = $db->query("SELECT cardName, manacost, color, cardType, cardText FROM nonCreatures WHERE cardID = '$tuple[cardID]' AND cardName = '$tuple[cardName]'");
             // $res2 = $cncre->fetch(PDO::FETCH_OBJ);
             // $resid2 = $res2->cardID;
