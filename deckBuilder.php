@@ -29,72 +29,65 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     </ul>
   </div>
 
-<br><br><br><br><br><br><br>
   <div id="textbox">
-    <div class="w3-row w3-padding-64">
-      <div class="w3-twothird w3-container">
-        <h2>New Deck?</h2>
-        <a href="newDeck.php"><button>New Deck</button></a>
-      </div>
+    <div class="w3-twothird w3-container">
+      <h2>New Deck?</h2>
+      <a href="newDeck.php"><button>New Deck</button></a>
     </div>
-    <div class="w3-row w3-padding-8">
-      <div class="w3-twothird w3-container">
-        <h2>Your Decks</h2>
-          <?php
-          try
-          {
+    <h2>Your Decks</h2>
+    <?php
+    try
+    {
             //open the sqlite database file
-            $db = new PDO('sqlite:./database/mtgcard.db');
+      $db = new PDO('sqlite:./database/mtgcard.db');
 
             // Set errormode to exceptions
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             //safely insert values into passengers table
-            $result = $db->query("SELECT deckID, deckName FROM DeckInfo ORDER BY deckName;");
+      $result = $db->query("SELECT deckID, deckName FROM DeckInfo ORDER BY deckName;");
 
-            echo '<table border="1">';
+      echo '<table border="1">';
             //loop through each tuple in result set
-            foreach($result as $tuple)
-            {
-              echo '<tr><td>';
-              echo "$tuple[deckName]";
-              echo '</td><td>';
-              echo "DeckID is $tuple[deckID]";
-              echo '</td><td>';
-              echo '<form action="deckViewer.php" method="POST">';
-              echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
-              echo '<input type="submit" value="View Deck"></form>';
-              echo '</td></tr>';
-            }
-            echo '</table>';
+      foreach($result as $tuple)
+      {
+        echo '<tr><td>';
+        echo "$tuple[deckName]";
+        echo '</td><td>';
+        echo "DeckID is $tuple[deckID]";
+        echo '</td><td>';
+        echo '<form action="deckViewer.php" method="POST">';
+        echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
+        echo '<input type="submit" value="View Deck"></form>';
+        echo '</td></tr>';
+      }
+      echo '</table>';
 
             //disconnect from database
-            $db = null;
-          }
-          catch(PDOException $e)
-          {
-            die('Exception : '.$e->getMessage());
-          }
+      $db = null;
+    }
+    catch(PDOException $e)
+    {
+      die('Exception : '.$e->getMessage());
+    }
 
           //redirect user to another page now
           //header("Location: login.html");
-          ?>
+    ?>
 
-        </div>
+  </div>
+  <footer id="myFooter">
+    <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
+      <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
+        <p>
+          All cards and art belongs to Wizards of the Coast.
+        </h6>
       </div>
-    </div>
-<footer id="myFooter">
-  <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
-    <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
-      <p>
-        All cards and art belongs to Wizards of the Coast.
-      </h6>
-    </div>
-  </footer>
-  <!-- END MAIN -->
-</div>
+    </footer>
+    <!-- END MAIN -->
+  </div>
 
-<script>
+  <script>
 // Get the Sidenav
 var mySidenav = document.getElementById("mySidenav");
 
