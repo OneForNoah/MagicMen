@@ -1,13 +1,10 @@
 body {
   /*border: 2px solid black;*/
-
-  background-image: url("http://54.191.108.35/background.png");
-
-
-
+  background-image: url("http://54.191.108.35/background.jpg");
   background-repeat: no-repeat;
-  background-size: 100% 130%;
-  height: 100%;
+  background-size: cover;
+  /*background-position: -250px -200px;*/
+  /*height: 100%;*/
 }
 
 ul {
