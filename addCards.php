@@ -14,6 +14,9 @@
 
   foreach($cards as $target)
   {
+    $copies = substr($target, 0, 1);
+    $target = substr($target, 2);
+
     $stmt = $db->prepare('INSERT INTO Decklists (deckID, playerID, cardID, cardName, numOf) VALUES (:deckID, :playerID, :cardID, :cardName, :numOf);');
     $stmt->bindParam(':deckID', $deckID);
     $stmt->bindParam(':playerID', $playerID);
@@ -29,24 +32,34 @@
     $idnonc = $db->query("SELECT cardID, cardName FROM nonCreatures WHERE cardName='$target';");
     $idcre = $db->query("SELECT cardID, cardName FROM creatures WHERE cardName='$target';");
     //echo $idcre->fetchColumn(0);
-    if(empty($idcre->fetchColumn(0)) && empty($idnonc->fetchColumn(0))) {
+
+    $res = $idnonc->fetch(PDO::FETCH_OBJ);
+    if(!isset($result->id_email)) {
       die("Exception : '$target' Card name not valid");
-    } else if(empty($idnonc)) {
+    } else if( $idcre->rowCount() > 0 ) {
+      echo "made it into creature insert";
       foreach($idcre as $tuple)
       {
         $cardID = $tuple['cardID'];
+        echo $cardID;
         $cardName = $tuple['cardName'];
+        echo $cardName;
       }
     } else {
+      echo "made it into noncreature insert";
       foreach($idnonc as $tuple)
       {
         $cardID = $tuple['cardID'];
+        echo $cardID;
         $cardName = $tuple['cardName'];
+        echo $cardName;
       }
     }
     //$num = $db->query("SELECT numOf FROM Decklists WHERE cardID='$cardID' AND deckID='$deckID';");
     $numOf = 1; //$num->fetchColumn(0);
-    $stmt->execute();
+    for($i = 0; $i<$copies; $i++ ) {
+      $stmt->execute();
+    }
   }
   $db = null;
 
@@ -56,5 +69,5 @@
     die('Exception : '.$e->getMessage());
   }
 
-  header("Location: ./deckBuilder.php");
+  //header("Location: ./deckBuilder.php");
 ?>
