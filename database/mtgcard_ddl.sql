@@ -34,7 +34,7 @@ create table DeckInfo (
   deckID integer unique not null,
   playerID integer,
   deckName text,
-  deckSize integer check (deckSize >= 60 or deckSize <= 300),
+  deckSize integer,
   primary key (deckID, playerID),
   foreign key (playerID) references Players(playerID)
     on update cascade
@@ -43,6 +43,10 @@ create table DeckInfo (
 
 create table Decklists (
   deckID integer,
+  playerID integer,
   cardID integer,
-  numOf integer
+  numOf integer,
+  foreign key (deckID, playerID) references DeckInfo(deckID, playerID)
+    on update cascade
+    on delete cascade
 );

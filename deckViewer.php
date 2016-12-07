@@ -48,7 +48,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           //safely insert values into passengers table
-          $result = $db->query("SELECT cardID FROM Decklists WHERE deckID = $deck_id");
+          $result = $db->query("SELECT cardID FROM Decklists WHERE deckID = '$deck_id'");
 
           echo '<table border="1">';
           //loop through each tuple in result set
