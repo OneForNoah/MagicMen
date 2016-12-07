@@ -37,7 +37,32 @@
 		$pw = $_POST['pw'];
 		//echo($stmt);
 		//$db->exec($stmt);
-		echo('Here');
+	    $stmt->execute();
+	    $db = null;
+
+	    $db = new PDO('sqlite:../database/mtgcard.db');
+
+	    // Set errormode to exceptions
+	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	    //safely insert values into passengers table
+		//order matters (look at your schema) -- fname, mname, lname, ssn
+		$stmt = $db->prepare('INSERT INTO Players (playerID, playerName, timePlayed, wins, losses, communityRating) VALUES (:id, :name, :tp, :win, :loss, :cr);');
+		$stmt->bindParam(':id', $id);
+		$stmt->bindParam(':name', $name);
+		$stmt->bindParam(':tp', $tp);
+		$stmt->bindParam(':win', $win);
+		$stmt->bindParam(':loss', $loss);
+		$stmt->bindParam(':cr', $cr);
+
+		$id=$max ;
+		$name = $_POST['usern'];
+		$tp = 0;
+		$win = 0;
+		$loss = 0;
+		$cr = 100;
+		//echo($stmt);
+		//$db->exec($stmt);
 	    $stmt->execute();
 
 	        //disconnect from database
@@ -49,5 +74,5 @@
 	}
 
 	//redirect user to another page now
-	header("Location: login.html");
+	header("Location: ../indexLoggedIn.html");
 ?>
