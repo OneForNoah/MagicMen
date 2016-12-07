@@ -10,12 +10,14 @@
   if(empty($deck_id)) {
     die('Exception : need real deck ID');
   }
-  $cards = explode('\n', $_POST['cardList']);
+  $cards = explode("\n", $_POST['cardList']);
 
   foreach($cards as $target)
   {
     $copies = substr($target, 0, 1);
     $target = substr($target, 2);
+
+    $target= trim(preg_replace('/\s\s+/', '', $target));
 
     $stmt = $db->prepare('INSERT INTO Decklists (deckID, playerID, cardID, cardName, numOf) VALUES (:deckID, :playerID, :cardID, :cardName, :numOf);');
     $stmt->bindParam(':deckID', $deckID);
@@ -49,10 +51,7 @@
     }
 
     $numOf = $copies;
-
-    for($i = 0; $i<$copies; $i++ ) {
-      $stmt->execute();
-    }
+    $stmt->execute();
   }
   $db = null;
 
