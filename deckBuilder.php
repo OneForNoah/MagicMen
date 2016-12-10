@@ -51,15 +51,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
             //safely insert values into passengers table
             $result = $db->query("SELECT deckID, deckName FROM DeckInfo ORDER BY deckName;");
-
+            $db = null;
             echo '<table border="1">';
             //loop through each tuple in result set
             foreach($result as $tuple)
             {
               echo '<tr><td>';
               echo "$tuple[deckName]";
-              echo '</td><td>';
-              echo "DeckID is $tuple[deckID]";
               echo '</td><td>';
               echo '<form action="deckViewer.php" method="POST">';
               echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
@@ -69,15 +67,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             echo '</table>';
 
             //disconnect from database
-            $db = null;
+            
           }
           catch(PDOException $e)
           {
             die('Exception : '.$e->getMessage());
           }
-
-          //redirect user to another page now
-          //header("Location: login.html");
           ?>
 
         </div>

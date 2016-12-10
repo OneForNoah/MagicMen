@@ -40,7 +40,6 @@
     $deckSize=0;
 
     $stmt->execute();
-
     $db = null;
 	}
 	catch(PDOException $e)

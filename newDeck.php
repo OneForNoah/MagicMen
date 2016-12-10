@@ -31,7 +31,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
       <h2>New Deck</h2>
-      Your new Deck's ID will be :
        <?php
         try
         {
@@ -45,10 +44,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           $result = $db->query("SELECT max(deckID) FROM DeckInfo");
           $id = $result->fetchColumn(0);
           $id++;
-          echo 'Your deckID will be '+$id;
-
-          //disconnect from database
+          //echo ''+$id;
           $db = null;
+          echo '<FORM METHOD=POST ACTION="makeDeck.php">';
+          echo '<P>Title: <input name="deckTitle" size="32">';
+          echo '<P>UserName: <input name="usern" size="32">';
+          echo '<input type="hidden" name="deck_id" value="$id">';
+          echo '<P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>';
+          echo '</FORM>';
+          //disconnect from database
+          
         }
         catch(PDOException $e)
         {
@@ -58,14 +63,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         //redirect user to another page now
         //header("Location: login.html");
         ?>
-      <FORM METHOD=POST ACTION="makeDeck.php">
-        <br>
-        <P>Title: <input name="deckTitle" size="32">
-        <br>
-        <P>UserName: <input name="usern" size="32">
-        <P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>
-        <P>
-      </FORM>
+      
     </div>
   </div>
   <footer id="myFooter">

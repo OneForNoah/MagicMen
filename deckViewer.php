@@ -31,15 +31,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <br>
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      Your deck ID is
         <?php
         try
         {
           $deck_id = $_POST['deck_id'];
-          echo $deck_id;
-          echo '<form action="deckEditor.php" method="POST">';
-          echo '<input type="hidden" name="deck_id" value="$deck_id">';
-          echo '<input type="submit" value="Edit Deck"></form>';
+          
           //echo '<form action="deckBuilder.php">';
           //echo '<input type="submit" value="Go Back"></form>';
 
@@ -116,6 +112,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               }
           }
           echo '</table>';
+
+          $id = $db->query("SELECT deckID FROM DeckInfo WHERE deckID = '$deck_id'");
+          foreach($id as $tuple) {
+            echo '<form action="deckEditor.php" method="POST">';
+            echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
+            echo '<input type="submit" value="Edit Deck"></form>';
+          }
 
           //disconnect from database
           $db = null;

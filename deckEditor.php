@@ -12,7 +12,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   padding-bottom: 12px;
 }
 </style>
-<body>
+<body style="background-image:url('deckbuilderbackground.jpg')">
   <!-- Navbar -->
   <div class="w3-top">
     <ul class="w3-navbar w3-theme w3-top w3-left-align w3-large">
@@ -27,32 +27,66 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
     </ul>
   </div>
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h2>Edit your decks</h2><br>
-      <h4>Each card must be typed exactly how it is spelled, and on a different line from the previous card</h4>
-      <h4>Begin each line with the number of copies of that card you want to add</h4>
-      <div class="col-md-8">
-
-        <FORM METHOD=POST ACTION="addCards.php">
-          <P>deckID: <input name="deckID"></P>
-          <textarea name = "cardList" placeholder="Enter card names here"rows="10" cols="100"></textarea>
-          <P><INPUT TYPE=SUBMIT> <INPUT TYPE=RESET>
-        </FORM>
-            <!--input name="deckID" placeholder="deckID" size="100">-->
+  <div id="textbox">
+    <div class="w3-row w3-padding-64">
+      <div class="w3-twothird w3-container">
+        <h2>Edit your decks</h2>
+        <h5>Insert cards like this:<br>
+          1 Black Lotus<br>
+          9 Forest<br>
+          4 Brainstorm</h5>
+        </div>
       </div>
     </div>
+    <div class="w3-twothird w3-container">
+      <div class="col-md-8">
+       <?php
+       try
+       {
+        $deck_id = $_POST['deck_id'];
+
+        $db = new PDO('sqlite:./database/mtgcard.db');
+        // Set errormode to exceptions
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $id = $db->query("SELECT deckID FROM DeckInfo WHERE deckID = '$deck_id'");
+        $db = null;
+
+        foreach($id as $tuple) {
+          echo '<FORM METHOD=POST ACTION="addCards.php">';
+          echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
+          echo '<textarea name = "cardList" placeholder="Enter card names here"rows="10" cols="100"></textarea>';
+          echo '<p><INPUT TYPE=SUBMIT>';
+          echo '</FORM>';
+          echo '<div id="textbox">';
+          echo '<h4>Back to view deck</h4>';
+          echo '<FORM METHOD=POST ACTION="deckViewer.php">';
+          echo '<input type="hidden" name="deck_id" value="'.$tuple['deckID'].'">';
+          echo '<p><INPUT TYPE=SUBMIT>';
+          echo '</FORM>';
+          echo '</div>';
+        }
+      }
+      catch(PDOException $e)
+      {
+        die('Exception : '.$e->getMessage());
+      }
+        //redirect user to another page now
+      ?>
+      <!--input name="deckID" placeholder="deckID" size="100">-->
+    </div>
+  </div>
   <footer id="myFooter">
     <div id="footer" class="w3-container w3-theme-l2 w3-padding-16">
       <h6>Designed by Trevor Nunn, Noah Reyes, Alden Walsh, and Andy Van Heuit.
         <p>All cards and art belongs to Wizards of the Coast.
         </h6>
-    </div>
+      </div>
     </footer>
-          <!-- END MAIN -->
+    <!-- END MAIN -->
   </div>
 
-<script>
+  <script>
 // Get the Sidenav
 var mySidenav = document.getElementById("mySidenav");
 
