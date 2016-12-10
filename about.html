@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+ <html>
+ <title>Magic: the UnGathering</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="normal.css">
+ <style>
+ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+ .w3-sidenav a,.w3-sidenav h4 {padding: 12px;}
+ .w3-navbar li a {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+</style>
+<body style="background-image:url('Paliano.png')">>
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <ul class="w3-navbar w3-theme w3-top w3-left-align w3-large">
+      <li class="w3-opennav w3-right w3-hide-large">
+      </li>
+      <li><a href="indexLoggedIn.html"><div id="header">MagicMen</div></a></li>
+      <!-- <div class="w3-left"> -->
+      <div>
+        <li><a href="deckBuilder.php"><div id="navbar">Deck Builder</div></a></li>
+        <li><a href="playgame.php"><div id="navbar">Play a Game</div></a></li>
+        <li><a href="search.html"><div id="navbar">Search</div></a></li>
+        <li><a href="about.html"><div id="navbar">About M:TG</div></a></li>
+      </div>
+      <div class="w3-right" id="navbar">
+        <li class="w3-hide-small"><a href="index.html" class="w3-hover-white" align="right">Log Out</a></li>
+      </div>
+    </ul>
+  </div>
+  <div class="w3-row w3-padding-32">
+    <div class="w3-col w3-container">
+      <p></p>
+    </div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+        <div style="background: #FAFAD2">
+        <h2>What is Magic: the Gathering?</h2>
+        <h4>
+        <p>Magic: the Gathering is a fantasy-based Trading Card Game developed and produced by Wizards of the Coast.</p>
+        <p>There are over 16,000 cards released so far, and more sets coming every few months.</p>
+        <p>There are 5 different colors -- White, Blue, Black, Red, and Green.</p>
+        <p>Each color has a spread of different attributes and abilities that cards in that color commonly have.</p>
+        <p>Games themselves are usually played between two people (duels) but some people or "formats" play as groups.</p>
+        <p>Each player starts at a preset lifetotal and the goal is to "defeat" the other player by dealing 20 damage to them.</p>
+        <p>Players play "Lands" which produce "mana", which is used to cast spells like "Creatures" and "Sorceries".</p>
+        <p>Here are a couple examples cards:</p>
+        </h4>
+      </div>
+        <img src="plains.png" alt="Plains card" style="width:240px;height:320px;">
+        <img src="shivan.png" alt="Shivan Dragon card" style="width:240px;height:320px;">
+        <img src="divination.png" alt="Divination card" style="width:240px;height:320px;">
+    </div>
+  </div>
+<!-- END MAIN -->
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+  if (mySidenav.style.display === 'block') {
+    mySidenav.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidenav.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+  mySidenav.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
